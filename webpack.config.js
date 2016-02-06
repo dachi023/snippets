@@ -1,4 +1,4 @@
-var path    = require('path');
+var path = require('path');
 
 module.exports = {
   context: path.join(__dirname, './src'),
@@ -11,23 +11,30 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      primer: __dirname + '/node_modules/primer-css/scss/primer.scss',
+      octicons: __dirname + '/node_modules/octicons/octicons/octicons.scss'
+    }
   },
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel'],
-
+        loaders: ['react-hot', 'babel']
       },
       {
-        test: /\.scss$/,
+        test: /\.(css|scss)$/,
         loaders: ['style', 'css', 'sass']
       },
       {
+        test: /\.(otf|eot|svg|ttf|woff|woff2).*$/,
+        loader: 'url'
+      },
+      {
         test: /\.html$/,
-        loader: 'file?name=[name].[ext]',
+        loader: 'file?name=[name].[ext]'
       }
     ]
   },
