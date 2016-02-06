@@ -1,6 +1,6 @@
 import React from 'react'
 import marked from 'marked'
-import './style.scss';
+import './style.scss'
 
 marked.setOptions({gfm: true, tables: true, breaks: true, sanitize: true})
 

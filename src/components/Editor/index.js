@@ -1,6 +1,6 @@
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import './style.scss';
+import './style.scss'
 
 class Editor extends React.Component {
   render() {
