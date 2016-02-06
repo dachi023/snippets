@@ -5,8 +5,8 @@
 
 ## Features
 
-- [ ] Markdown editor
-- [ ] Markdown preview
+- [x] Markdown editor
+- [x] Markdown preview
 - [ ] Snippets list
 - [ ] Post Snippets
 - [ ] Edit Snippets
