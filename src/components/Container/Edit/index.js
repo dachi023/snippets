@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../Header'
-import Editor from '../Editor'
-import Previewer from '../Previewer'
+import Header from '../../Header'
+import Editor from '../../Editor'
+import Previewer from '../../Previewer'
 import './style.scss';
 
 class Container extends React.Component {

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Container from './components/Container'
+import Container from './components/Container/Edit'
 import 'primer'
 import 'octicons'
 
