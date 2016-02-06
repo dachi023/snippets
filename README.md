@@ -1,3 +1,5 @@
+[![Stories in Ready](https://badge.waffle.io/dachi023/snippets.png?label=ready&title=Ready)](http://waffle.io/dachi023/snippets)
+
 # snippets
 
 週報を書いてメンバーに共有するためのツール
