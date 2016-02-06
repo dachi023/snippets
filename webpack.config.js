@@ -1,4 +1,4 @@
-var path = require('path');
+var path    = require('path');
 
 module.exports = {
   context: path.join(__dirname, './src'),
@@ -10,12 +10,15 @@ module.exports = {
     path: path.join(__dirname, './dist'),
     filename: 'bundle.js'
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader'],
+        loaders: ['react-hot', 'babel'],
 
       },
       {
@@ -24,8 +27,13 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        loader: "file?name=[name].[ext]",
+        loader: 'file?name=[name].[ext]',
       }
     ]
+  },
+  devtool: '#source-map',
+  devServer: {
+    contentBase: './src',
+    hot: true
   }
 };
