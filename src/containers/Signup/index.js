@@ -10,8 +10,10 @@ class Signup extends React.Component {
         <div className="columns">
           <div className="one column">
             <p className="lead">
-              <a href="https://mlkcca.com" target="_blank">Milkcocoa</a>
-              のアカウントを作成してください<br />
+              <a href="https://mlkcca.com" target="_blank">
+                Milkcocoaのアカウントを作成してください
+              </a>
+              <br />
               1グループにつき1つのアプリ情報が必要となります
             </p>
           </div>
@@ -23,6 +25,10 @@ class Signup extends React.Component {
       </div>
     )
   }
+}
+
+Signup.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default Signup

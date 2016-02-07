@@ -3,11 +3,11 @@ import Editor from '../../components/Editor'
 import Previewer from '../../components/Previewer'
 import './style.scss'
 
-class Container extends React.Component {
+class Edit extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: null,
+      id: this.prop.params.id,
       text: ''
     }
   }
@@ -31,4 +31,8 @@ class Container extends React.Component {
   }
 }
 
-export default Container
+Edit.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
+
+export default Edit
