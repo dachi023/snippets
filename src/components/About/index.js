@@ -6,7 +6,7 @@ class About extends React.Component {
     return (
       <div>
         <h2>Snippets</h2>
-        <p className="note">
+        <p>
           特定のメンバー内で週報を送り合うことです<br />
           <br />
           <span className="octicon octicon-check text-open"></span> 1週間を振り返ります<br />
@@ -20,7 +20,7 @@ class About extends React.Component {
         <br />
 
         <h2>Milkcocoa</h2>
-        <p className="note">
+        <p>
           データストアのためのクラウドプラットフォームです<br />
           Snippetsでは週報の保存, 更新, 取得のために利用しています<br />
           <br />
