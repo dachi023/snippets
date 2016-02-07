@@ -1,7 +1,6 @@
 import React from 'react'
 import Editor from '../../components/Editor'
 import Previewer from '../../components/Previewer'
-import './style.scss'
 
 class Edit extends React.Component {
   constructor(props) {

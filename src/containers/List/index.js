@@ -1,15 +1,22 @@
 import React from 'react'
-import {Link} from 'react-router'
 import Firebase from 'firebase'
-import './style.scss'
+import {Avatar, Divider} from 'material-ui'
+import {List, ListItem} from 'material-ui/lib/lists'
+import ActionAssignment from 'material-ui/lib/svg-icons/action/assignment'
 
-class List extends React.Component {
+class Entries extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      list: []
+      entries: []
     }
     this.ref = null
+  }
+
+  static get contextTypes() {
+    return {
+      router: React.PropTypes.object.isRequired
+    }
   }
 
   componentDidMount() {
@@ -20,13 +27,15 @@ class List extends React.Component {
     user = JSON.parse(user)
 
     this.ref = new Firebase(user.firebaseUrl)
-    new Firebase(user.firebaseUrl).child('snippets/entries').once('value', entries => {
-      let list = []
-      entries.forEach(entry => {
-        list.push(entry)
+    new Firebase(user.firebaseUrl)
+      .child('snippets/entries')
+      .once('value', res => {
+        let entries = []
+        res.forEach(entry => {
+          entries.push(entry)
+        })
+        this.setState({entries: entries})
       })
-      this.setState({list: list})
-    })
   }
 
   componentWillUnmount() {
@@ -35,32 +44,44 @@ class List extends React.Component {
     }
   }
 
+  getStyles() {
+    return {
+      container: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      },
+      list: {
+        marginLeft: '64px',
+        marginRight: '64px'
+      },
+      divider: {
+        marginTop: '8px',
+        marginBottom: '8px'
+      }
+    }
+  }
+
   render() {
-    let entries = this.state.list.map(entry => {
+    const styles = this.getStyles()
+    const entries = this.state.entries.map(entry => {
       return (
-        <div className="entry-list__item" key={entry.key()}>
-          <Link to={'items/' + entry.key()}>
-            <h2>{entry.val().title}</h2>
-          </Link>
-          <h4>{entry.val().username}</h4>
-          <hr />
+        <div>
+          <ListItem
+            key={entry.key()}
+            leftAvatar={<Avatar icon={<ActionAssignment />} />}
+            primaryText={entry.val().title}
+            secondaryText={entry.val().username}
+          />
+          <Divider style={styles.divider} />
         </div>
       )
     })
     return (
-      <div className="container">
-        <div className="columns">
-          <div className="two-thirds column">
-            <div className="entry-list">{entries}</div>
-          </div>
-        </div>
+      <div style={styles.container}>
+        <List style={styles.list}>{entries}</List>
       </div>
     )
   }
 }
 
-List.contextTypes = {
-  router: React.PropTypes.object.isRequired
-}
-
-export default List
+export default Entries

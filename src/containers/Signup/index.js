@@ -1,34 +1,32 @@
 import React from 'react'
 import Configure from '../../components/Configure'
 import About from '../../components/About'
-import './style.scss'
 
 class Signup extends React.Component {
+  static get contextTypes() {
+    return {
+      router: React.PropTypes.object.isRequired
+    }
+  }
+
+  getStyles() {
+    return {
+      container: {
+        textAlign: 'center'
+      }
+    }
+  }
+
   render() {
+    const styles = this.getStyles()
     return (
-      <div className="container">
-        <div className="columns">
-          <div className="one column">
-            <p className="lead">
-              <a href="https://www.firebase.com" target="_blank">
-                Firebaseのアカウントを作成してください
-              </a>
-              <br />
-              1グループにつき1つのアプリ情報が必要となります
-            </p>
-          </div>
-        </div>
-        <div className="columns">
-          <div className="one-half column"><About /></div>
-          <div className="one-half column"><Configure /></div>
-        </div>
+      <div style={styles.container}>
+        <h1>Sign up for Snippets</h1>
+        <p>Please create app in <a href="https://www.firebase.com" target="_blank">Firebase</a></p>
+        <Configure />
       </div>
     )
   }
-}
-
-Signup.contextTypes = {
-  router: React.PropTypes.object.isRequired
 }
 
 export default Signup

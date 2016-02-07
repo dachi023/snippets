@@ -13,7 +13,6 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-      primer: __dirname + '/node_modules/primer-css/scss/primer.scss',
       octicons: __dirname + '/node_modules/octicons/octicons/octicons.scss'
     }
   },

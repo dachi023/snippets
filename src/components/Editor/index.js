@@ -1,20 +1,22 @@
 import React from 'react'
-import TextareaAutosize from 'react-textarea-autosize'
-import './style.scss'
+import {TextField} from 'material-ui'
 
-class Editor extends React.Component {
+class MarkdownEditor extends React.Component {
   render() {
     return (
-      <div className="write-snnipets">
-        <TextareaAutosize
-          className="write-snnipets__textarea input-contrast input-block"
-          minRows={20}
-          defaultValue={this.props.text}
-          onChange={e => this.props.onChangeSnippetsText(e.target.value)}
+      <div>
+        <TextField
+          defaultValue={this.props.defaultValue}
+          floatingLabelText="Content"
+          fullWidth={true}
+          multiLine={true}
+          onChange={e => this.props.onChange(e.target.value)}
+          required={true}
+          rows={10}
         />
       </div>
     )
   }
 }
 
-export default Editor
+export default MarkdownEditor

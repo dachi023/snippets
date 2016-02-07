@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.scss'
+import {Card, CardText, RaisedButton, TextField} from 'material-ui'
 
 class Configure extends React.Component {
   constructor(props) {
@@ -11,58 +11,69 @@ class Configure extends React.Component {
     }
   }
 
+  static get contextTypes() {
+    return {
+      router: React.PropTypes.object.isRequired
+    }
+  }
+
+  getStyles() {
+    return {
+      container: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '50%'
+      }
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault()
     localStorage.setItem('user', JSON.stringify(this.state))
-    this.context.router.push('/new')
+    this.context.router.push('/items')
   }
 
   render() {
+    const styles = this.getStyles()
     return (
-      <form onSubmit={e => this.handleSubmit(e)}>
-        <h2>User profile</h2>
-        <dl className="form">
-          <dt><label>Name</label></dt>
-          <dd>
-            <input name="username" type="text" value={this.state.username}
-              className="input-contrast"
-              onChange={e => this.setState({username: e.target.value})} />
-          </dd>
-        </dl>
-        <dl className="form">
-          <dt><label>Email Address</label></dt>
-          <dd>
-            <input name="email" type="email" value={this.state.email}
-              className="input-contrast"
-              onChange={e => this.setState({email: e.target.value})} />
-          </dd>
-        </dl>
-        <br />
-
-        <h2>Firebase app</h2>
-        <dl className="form">
-          <dt><label>URL</label></dt>
-          <dd>
-            <input name="app-id" type="text" value={this.state.firebaseUrl}
-              placeholder="https://<YOUR-FIREBASE-APP>.firebaseio.com/"
-              className="input-contrast"
-              onChange={e => this.setState({firebaseUrl: e.target.value})}/>
-          </dd>
-        </dl>
-        <br />
-
-        <div className="clearfix">
-          <div className="left">
-            <button type="submit" className="btn btn-primary">Create An Account</button>
-          </div>
-        </div>
-      </form>
+      <div style={styles.container}>
+        <Card>
+          <CardText>
+            <form onSubmit={e => this.handleSubmit(e)}>
+              <TextField
+                floatingLabelText="Username"
+                fullWidth={true}
+                hintText="John Doe"
+                onChange={e => this.setState({username: e.target.value})}
+                required={true}
+              /><br />
+              <TextField
+                floatingLabelText="Email"
+                fullWidth={true}
+                hintText="john.doe@example.com"
+                onChange={e => this.setState({email: e.target.value})}
+                required={true}
+                type="email"
+              /><br />
+              <TextField
+                floatingLabelText="Firebase Url"
+                fullWidth={true}
+                hintText="https://xxx.firebaseio.com"
+                onChange={e => this.setState({firebaseUrl: e.target.value})}
+                required={true}
+              /><br /><br /><br />
+              <RaisedButton
+                fullWidth={true}
+                label="save settings"
+                secondary={true}
+                type="submit"
+              />
+            </form>
+          </CardText>
+        </Card>
+      </div>
     )
   }
-}
-
-Configure.contextTypes = {
-  router: React.PropTypes.object.isRequired
 }
 
 export default Configure

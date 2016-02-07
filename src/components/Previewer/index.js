@@ -1,34 +1,51 @@
 import React from 'react'
+import {Divider} from 'material-ui'
 import marked from 'marked'
-import './style.scss'
 
-marked.setOptions({gfm: true, tables: true, breaks: true, sanitize: true})
+class MarkdownPreview extends React.Component {
+  constructor(props) {
+    super(props)
+    marked.setOptions({
+      gfm: true,
+      tables: true,
+      breaks: true,
+      sanitize: true
+    })
+  }
 
-class Editor extends React.Component {
-  renderSnippets() {
-    if (this.props.text == null || this.props.text.length < 1) {
+  getStyles() {
+    return {
+      divider: {
+        marginTop: '8px',
+        marginBottom: '8px'
+      }
+    }
+  }
+
+  renderMarkdown(value) {
+    if (value == null || value.trim().length < 1) {
       return (
-        <div className="blankslate clean-background">
-          <span className="mega-octicon octicon-markdown"></span>
-          <h3>Nothing to preview</h3>
-        </div>
+        <h3>Nothing to preview</h3>
       )
     }
-    let markdown = marked(this.props.text)
+    const markdown = marked(value)
     return (
-      <div className="preview-snnipets__markdown-body">
+      <div>
         <span dangerouslySetInnerHTML={{__html: markdown}}></span>
       </div>
     )
   }
 
   render() {
+    const styles = this.getStyles()
     return (
-      <div className="preview-snnipets">
-        {this.renderSnippets()}
+      <div>
+        <h1>{this.props.title}</h1>
+        <Divider style={styles.divider} />
+        {this.renderMarkdown(this.props.content)}
       </div>
     )
   }
 }
 
-export default Editor
+export default MarkdownPreview
