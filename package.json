@@ -43,6 +43,7 @@
     "webpack-hot-middleware": "^2.6.4"
   },
   "dependencies": {
+    "firebase": "^2.4.0",
     "history": "^2.0.0",
     "marked": "^0.3.5",
     "milkcocoa": "^0.4.1",

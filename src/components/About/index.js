@@ -19,12 +19,12 @@ class About extends React.Component {
         </p>
         <br />
 
-        <h2>Milkcocoa</h2>
+        <h2>Firebase</h2>
         <p>
           データストアのためのクラウドプラットフォームです<br />
           Snippetsでは週報の保存, 更新, 取得のために利用しています<br />
           <br />
-          <a href="https://mlkcca.com/" target="_blank">Milkcocoa</a>
+          <a href="https://www.firebase.com" target="_blank">Firebase</a>
         </p>
       </div>
     )

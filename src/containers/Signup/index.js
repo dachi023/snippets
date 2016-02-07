@@ -10,8 +10,8 @@ class Signup extends React.Component {
         <div className="columns">
           <div className="one column">
             <p className="lead">
-              <a href="https://mlkcca.com" target="_blank">
-                Milkcocoaのアカウントを作成してください
+              <a href="https://www.firebase.com" target="_blank">
+                Firebaseのアカウントを作成してください
               </a>
               <br />
               1グループにつき1つのアプリ情報が必要となります
@@ -19,8 +19,8 @@ class Signup extends React.Component {
           </div>
         </div>
         <div className="columns">
-          <div className="one-half column"><Configure /></div>
           <div className="one-half column"><About /></div>
+          <div className="one-half column"><Configure /></div>
         </div>
       </div>
     )

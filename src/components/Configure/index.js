@@ -7,9 +7,7 @@ class Configure extends React.Component {
     this.state = {
       username: '',
       email: '',
-      milkcocoaAppId: '',
-      milkcocoaApiKey: '',
-      milkcocoaApiSecret: ''
+      firebaseUrl: ''
     }
   }
 
@@ -41,35 +39,21 @@ class Configure extends React.Component {
         </dl>
         <br />
 
-        <h2>Milkcocoa application</h2>
+        <h2>Firebase app</h2>
         <dl className="form">
-          <dt><label>app_id</label></dt>
+          <dt><label>URL</label></dt>
           <dd>
-            <input name="app-id" type="text" value={this.state.milkcocoaAppId}
+            <input name="app-id" type="text" value={this.state.firebaseUrl}
               className="input-contrast"
-              onChange={e => this.setState({milkcocoaAppId: e.target.value})}/>
+              onChange={e => this.setState({firebaseUrl: e.target.value})}/>
           </dd>
         </dl>
-        <dl className="form">
-          <dt><label>api_key</label></dt>
-          <dd>
-            <input name="api-key" type="text" value={this.state.milkcocoaApiKey}
-              className="input-contrast"
-              onChange={e => this.setState({milkcocoaApiKey: e.target.value})}/>
-          </dd>
-        </dl>
-        <dl className="form">
-          <dt><label>api_secret</label></dt>
-          <dd>
-            <input name="api-secret" type="text" value={this.state.milkcocoaApiSecret}
-              className="input-contrast"
-              onChange={e => this.setState({milkcocoaApiSecret: e.target.value})}/>
-          </dd>
-        </dl>
+        <br />
 
-        <div className="form-actions">
-          <hr />
-          <button type="submit" className="btn btn-primary">Create An Account</button>
+        <div className="clearfix">
+          <div className="left">
+            <button type="submit" className="btn btn-primary">Create An Account</button>
+          </div>
         </div>
       </form>
     )
