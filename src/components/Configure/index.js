@@ -44,6 +44,7 @@ class Configure extends React.Component {
           <dt><label>URL</label></dt>
           <dd>
             <input name="app-id" type="text" value={this.state.firebaseUrl}
+              placeholder="https://<YOUR-FIREBASE-APP>.firebaseio.com/"
               className="input-contrast"
               onChange={e => this.setState({firebaseUrl: e.target.value})}/>
           </dd>
