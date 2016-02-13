@@ -40,7 +40,7 @@ class App extends React.Component {
         <MenuItem
           primaryText="Snippets"
           leftIcon={<Inbox />}
-          onTouchTap={e => this.handleMenuItemTouchTap(e, '/items')}
+          onTouchTap={e => this.handleMenuItemTouchTap(e, '/entries')}
         />
         <Divider style={styles.divider} />
         <MenuItem
@@ -51,7 +51,7 @@ class App extends React.Component {
         <MenuItem
           primaryText="WIP"
           leftIcon={<Drafts />}
-          onTouchTap={e => this.handleMenuItemTouchTap(e, '/wip')}
+          onTouchTap={e => this.handleMenuItemTouchTap(e, '/entries/wip')}
         />
         <Divider style={styles.divider} />
         <MenuItem

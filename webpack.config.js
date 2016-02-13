@@ -11,10 +11,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
-    alias: {
-      octicons: __dirname + '/node_modules/octicons/octicons/octicons.scss'
-    }
+    extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
@@ -24,19 +21,12 @@ module.exports = {
         loaders: ['react-hot', 'babel']
       },
       {
-        test: /\.(css|scss)$/,
-        loaders: ['style', 'css', 'sass']
-      },
-      {
-        test: /\.(otf|eot|svg|ttf|woff|woff2).*$/,
-        loader: 'url'
-      },
-      {
         test: /\.html$/,
         loader: 'file?name=[name].[ext]'
       }
     ]
   },
+  watch: false,
   devtool: '#source-map',
   devServer: {
     contentBase: './src',

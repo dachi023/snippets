@@ -6,7 +6,7 @@ injectTapEventPlugin()
 
 import App from './containers/App'
 import Signup from './containers/Signup'
-import List from './containers/List'
+import Entries from './containers/Entries'
 import New from './containers/New'
 import Edit from './containers/Edit'
 
@@ -15,10 +15,11 @@ ReactDOM.render((
     <Route path="/" component={App}>
       <IndexRoute component={Signup} />
       <Route path="signup" component={Signup} />
+      <Route path="settings" component="" />
       <Route path="new" component={New} />
-      <Route path="items" component={List} />
-      <Route path="items/:id" component=""/>
-      <Route path="items/:id/edit" component={Edit} />
+      <Route path="entries" component={Entries} />
+      <Route path="entry/:id" component=""/>
+      <Route path="entry/:id/edit" component={Edit} />
     </Route>
   </Router>
 ), document.getElementById('root'))

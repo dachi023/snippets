@@ -30,7 +30,9 @@ class Configure extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     localStorage.setItem('user', JSON.stringify(this.state))
-    this.context.router.push('/items')
+    if (typeof this.props.handleSubmit == 'function') {
+      this.props.handleSubmit(e, this.state)
+    }
   }
 
   render() {
@@ -61,7 +63,7 @@ class Configure extends React.Component {
                 hintText="https://xxx.firebaseio.com"
                 onChange={e => this.setState({firebaseUrl: e.target.value})}
                 required={true}
-              /><br /><br /><br />
+              /><br /><br />
               <RaisedButton
                 fullWidth={true}
                 label="save settings"

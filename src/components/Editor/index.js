@@ -12,7 +12,7 @@ class MarkdownEditor extends React.Component {
           multiLine={true}
           onChange={e => this.props.onChange(e.target.value)}
           required={true}
-          rows={10}
+          rows={this.props.rows}
         />
       </div>
     )

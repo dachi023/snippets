@@ -1,8 +1,9 @@
 import React from 'react'
-import Firebase from 'firebase'
 import {Avatar, Divider} from 'material-ui'
 import {List, ListItem} from 'material-ui/lib/lists'
 import ActionAssignment from 'material-ui/lib/svg-icons/action/assignment'
+import Firebase from 'firebase'
+import User from '../../store/User'
 
 class Entries extends React.Component {
   constructor(props) {
@@ -10,7 +11,6 @@ class Entries extends React.Component {
     this.state = {
       entries: []
     }
-    this.ref = null
   }
 
   static get contextTypes() {
@@ -20,28 +20,22 @@ class Entries extends React.Component {
   }
 
   componentDidMount() {
-    let user = localStorage.getItem('user')
-    if (!user) {
+    let me = User.me()
+    if (!me) {
       return this.context.router.push('/signup')
     }
-    user = JSON.parse(user)
-
-    this.ref = new Firebase(user.firebaseUrl)
-    new Firebase(user.firebaseUrl)
-      .child('snippets/entries')
+    let ref = new Firebase(me.firebaseUrl)
+    ref.child('snippets/entries')
       .once('value', res => {
         let entries = []
         res.forEach(entry => {
-          entries.push(entry)
+          if (!entry.val().wip) {
+            entries.push(entry)
+          }
         })
-        this.setState({entries: entries})
+        this.setState({entries})
+        ref.off()
       })
-  }
-
-  componentWillUnmount() {
-    if (this.ref) {
-      this.ref.off()
-    }
   }
 
   getStyles() {
@@ -65,9 +59,8 @@ class Entries extends React.Component {
     const styles = this.getStyles()
     const entries = this.state.entries.map(entry => {
       return (
-        <div>
+        <div key={entry.key()}>
           <ListItem
-            key={entry.key()}
             leftAvatar={<Avatar icon={<ActionAssignment />} />}
             primaryText={entry.val().title}
             secondaryText={entry.val().username}
