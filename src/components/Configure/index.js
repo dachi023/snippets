@@ -38,7 +38,6 @@ class Configure extends React.Component {
       const token = Crypto.AES.encrypt(this.state.email, res.val()).toString()
       this.setState({token})
       new User(this.state).save()
-      ref.off()
       if (typeof this.props.handleSubmit == 'function') {
         this.props.handleSubmit(e, this.state)
       }

@@ -9,7 +9,7 @@ import Editor from '../../components/Editor'
 import Previewer from '../../components/Previewer'
 import User from '../../store/User'
 
-class New extends React.Component {
+class EntryEdit extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -141,4 +141,4 @@ class New extends React.Component {
   }
 }
 
-export default New
+export default EntryEdit

@@ -33,7 +33,6 @@ class Entries extends React.Component {
         }
       })
       this.setState({entries})
-      ref.off()
     })
   }
 
@@ -46,10 +45,6 @@ class Entries extends React.Component {
       list: {
         marginLeft: '64px',
         marginRight: '64px'
-      },
-      divider: {
-        marginTop: '8px',
-        marginBottom: '8px'
       }
     }
   }
@@ -63,14 +58,17 @@ class Entries extends React.Component {
             leftAvatar={<Avatar icon={<ActionAssignment />} />}
             primaryText={entry.val().title}
             secondaryText={entry.val().username}
+            onTouchTap={() => this.context.router.push(`/entry/${entry.key()}`)}
           />
-          <Divider style={styles.divider} />
+          <Divider />
         </div>
       )
     })
     return (
       <div style={styles.container}>
-        <List style={styles.list}>{entries}</List>
+        <List subheader="Snippets" style={styles.list}>
+          {entries}
+        </List>
       </div>
     )
   }
