@@ -7,7 +7,8 @@
   "scripts": {
     "test": "eslint ./src",
     "start": "webpack-dev-server --history-api-fallback --hot --inline --progress --colors --port 3000",
-    "build": "webpack --progress --colors"
+    "build": "webpack --progress --colors",
+    "postinstall": "webpack"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,7 @@
   },
   "dependencies": {
     "crypto-js": "^3.1.6",
+    "express": "^4.13.4",
     "firebase": "^2.4.0",
     "history": "^2.0.0",
     "marked": "^0.3.5",
