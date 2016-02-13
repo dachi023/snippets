@@ -25,17 +25,16 @@ class Entries extends React.Component {
       return this.context.router.push('/signup')
     }
     let ref = new Firebase(me.firebaseUrl)
-    ref.child('snippets/entries')
-      .once('value', res => {
-        let entries = []
-        res.forEach(entry => {
-          if (!entry.val().wip) {
-            entries.push(entry)
-          }
-        })
-        this.setState({entries})
-        ref.off()
+    ref.child('snippets/entries').once('value', res => {
+      let entries = []
+      res.forEach(entry => {
+        if (!entry.val().wip) {
+          entries.push(entry)
+        }
       })
+      this.setState({entries})
+      ref.off()
+    })
   }
 
   getStyles() {

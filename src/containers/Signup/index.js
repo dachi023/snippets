@@ -22,7 +22,7 @@ class Signup extends React.Component {
       <div style={styles.container}>
         <h1>Sign up for Snippets</h1>
         <p>Please create app in <a href="https://www.firebase.com" target="_blank">Firebase</a></p>
-        <Configure handleSubmit={() => this.context.router.push('/items')} />
+        <Configure handleSubmit={() => this.context.router.push('/entries')} />
       </div>
     )
   }

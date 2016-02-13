@@ -4,7 +4,6 @@ import {getMuiTheme} from 'material-ui/lib/styles'
 import Add from 'material-ui/lib/svg-icons/content/add'
 import Drafts from 'material-ui/lib/svg-icons/content/drafts'
 import Inbox from 'material-ui/lib/svg-icons/content/inbox'
-import List from 'material-ui/lib/svg-icons/action/list'
 import Settings from 'material-ui/lib/svg-icons/action/settings'
 
 class App extends React.Component {
@@ -46,7 +45,7 @@ class App extends React.Component {
         <MenuItem
           primaryText="New"
           leftIcon={<Add />}
-          onTouchTap={e => this.handleMenuItemTouchTap(e, '/new')}
+          onTouchTap={e => this.handleMenuItemTouchTap(e, '/entry/new')}
         />
         <MenuItem
           primaryText="WIP"

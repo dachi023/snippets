@@ -16,8 +16,8 @@ ReactDOM.render((
       <IndexRoute component={Signup} />
       <Route path="signup" component={Signup} />
       <Route path="settings" component="" />
-      <Route path="new" component={New} />
       <Route path="entries" component={Entries} />
+      <Route path="entry/new" component={New} />
       <Route path="entry/:id" component=""/>
       <Route path="entry/:id/edit" component={Edit} />
     </Route>

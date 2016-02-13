@@ -36,6 +36,7 @@ class New extends React.Component {
     ref.child('snippets/entries').push({
       title: this.state.title,
       content: this.state.content,
+      token: me.token,
       username: me.username,
       wip: wip,
       comments: []

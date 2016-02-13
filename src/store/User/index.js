@@ -3,6 +3,7 @@ class User {
     this.username = user.username
     this.email = user.email
     this.firebaseUrl = user.firebaseUrl
+    this.token = user.token
   }
 
   static me() {
@@ -13,12 +14,13 @@ class User {
     return {
       username: this.username,
       email: this.email,
-      firebaseUrl: this.firebase
+      firebaseUrl: this.firebaseUrl,
+      token: this.token
     }
   }
 
   save() {
-    localStorage.setItem(JSON.stringify(this.user))
+    localStorage.setItem('user', JSON.stringify(this.data))
   }
 }
 

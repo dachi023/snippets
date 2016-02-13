@@ -1,5 +1,8 @@
 import React from 'react'
 import {Card, CardText, RaisedButton, TextField} from 'material-ui'
+import Firebase from 'firebase'
+import Crypto from 'crypto-js'
+import User from '../../store/User'
 
 class Configure extends React.Component {
   constructor(props) {
@@ -7,7 +10,8 @@ class Configure extends React.Component {
     this.state = {
       username: '',
       email: '',
-      firebaseUrl: ''
+      firebaseUrl: '',
+      token: null
     }
   }
 
@@ -29,10 +33,16 @@ class Configure extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    localStorage.setItem('user', JSON.stringify(this.state))
-    if (typeof this.props.handleSubmit == 'function') {
-      this.props.handleSubmit(e, this.state)
-    }
+    let ref = new Firebase(this.state.firebaseUrl)
+    ref.child('snippets/passPhrase').once('value', res => {
+      const token = Crypto.AES.encrypt(this.state.email, res.val()).toString()
+      this.setState({token})
+      new User(this.state).save()
+      ref.off()
+      if (typeof this.props.handleSubmit == 'function') {
+        this.props.handleSubmit(e, this.state)
+      }
+    })
   }
 
   render() {
