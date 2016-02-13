@@ -6,7 +6,7 @@ class MarkdownEditor extends React.Component {
     return (
       <div>
         <TextField
-          defaultValue={this.props.defaultValue}
+          value={this.props.value}
           floatingLabelText="Content"
           fullWidth={true}
           multiLine={true}

@@ -5,7 +5,7 @@ import Save from 'material-ui/lib/svg-icons/content/save'
 import ModeEdit from 'material-ui/lib/svg-icons/editor/mode-edit'
 import Publish from 'material-ui/lib/svg-icons/editor/publish'
 import Firebase from 'firebase'
-import Editor from '../../components/Editor'
+import MarkdownEditor from '../../components/MarkdownEditor'
 import Previewer from '../../components/Previewer'
 import User from '../../store/User'
 
@@ -14,14 +14,25 @@ class EntryEdit extends React.Component {
     super(props)
     this.state = {
       title: '',
-      content: ''
+      content: '',
+      wip: true
     }
   }
 
   componentDidMount() {
-    if (!User.me()) {
+    const me = User.me()
+    if (!me) {
       return this.context.router.push('/signup')
     }
+    const path = `snippets/entries/${this.props.params.id}`
+    new Firebase(me.firebaseUrl).child(path).once('value', res => {
+      const entry = res.val()
+      const token = me.token
+      if (!entry || token !== entry.token) {
+        return this.context.router.push('/signup')
+      }
+      this.setState({title: entry.title, content: entry.content, wip: entry.wip})
+    })
   }
 
   static get contextTypes() {
@@ -31,15 +42,11 @@ class EntryEdit extends React.Component {
   }
 
   handleSave(wip) {
-    let me = User.me()
-    let ref = new Firebase(me.firebaseUrl)
-    ref.child('snippets/entries').push({
+    const path = `snippets/entries/${this.props.params.id}`
+    new Firebase(User.me().firebaseUrl).child(path).update({
       title: this.state.title,
       content: this.state.content,
-      token: me.token,
-      username: me.username,
-      wip: wip,
-      comments: []
+      wip: wip
     })
     this.context.router.push(wip ? '/entries/wip' : '/entries')
   }
@@ -91,16 +98,17 @@ class EntryEdit extends React.Component {
           <Tabs>
             <Tab label="Write">
               <TextField
+                value={this.state.title}
                 floatingLabelText="Title"
                 fullWidth={true}
                 hintText="Week 1-7 Jun 2016"
                 onChange={e => this.setState({title: e.target.value})}
                 required={true}
               />
-              <Editor
-                defaultValue={this.state.content}
+              <MarkdownEditor
+                value={this.state.content}
                 rows={15}
-                onChange={content => this.setState({content: content})}
+                onChange={content => this.setState({content})}
               />
             </Tab>
             <Tab label="Preview">

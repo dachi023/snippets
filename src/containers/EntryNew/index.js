@@ -5,7 +5,7 @@ import Save from 'material-ui/lib/svg-icons/content/save'
 import ModeEdit from 'material-ui/lib/svg-icons/editor/mode-edit'
 import Publish from 'material-ui/lib/svg-icons/editor/publish'
 import Firebase from 'firebase'
-import Editor from '../../components/Editor'
+import MarkdownEditor from '../../components/MarkdownEditor'
 import Previewer from '../../components/Previewer'
 import User from '../../store/User'
 
@@ -96,8 +96,7 @@ class EntryNew extends React.Component {
                 onChange={e => this.setState({title: e.target.value})}
                 required={true}
               />
-              <Editor
-                defaultValue={this.state.content}
+              <MarkdownEditor
                 rows={15}
                 onChange={content => this.setState({content})}
               />
