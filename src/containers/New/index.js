@@ -1,9 +1,13 @@
 import React from 'react'
-import {RaisedButton, Tabs, Tab, TextField} from 'material-ui'
+import {FloatingActionButton, Tabs, Tab, TextField} from 'material-ui'
+import Visibility from 'material-ui/lib/svg-icons/action/visibility'
 import Save from 'material-ui/lib/svg-icons/content/save'
+import ModeEdit from 'material-ui/lib/svg-icons/editor/mode-edit'
 import Publish from 'material-ui/lib/svg-icons/editor/publish'
+import Firebase from 'firebase'
 import Editor from '../../components/Editor'
 import Previewer from '../../components/Previewer'
+import User from '../../store/User'
 
 class New extends React.Component {
   constructor(props) {
@@ -14,18 +18,29 @@ class New extends React.Component {
     }
   }
 
-  //TODO componentDidMount
-  // this.ref.child('snippets/entries').push({
-  //   title:    'タイトル3',
-  //   content:  '内容',
-  //   username: 'ユーザ名',
-  //   comments: [{comment: 'コメント', username: 'コメントユーザ名'}]
-  // })
+  componentDidMount() {
+    if (!User.me()) {
+      return this.context.router.push('/signup')
+    }
+  }
 
   static get contextTypes() {
     return {
       router: React.PropTypes.object.isRequired
     }
+  }
+
+  handleSave(wip) {
+    let me = User.me()
+    let ref = new Firebase(me.firebaseUrl)
+    ref.child('snippets/entries').push({
+      title: this.state.title,
+      content: this.state.content,
+      username: me.username,
+      wip: wip,
+      comments: []
+    })
+    this.context.router.push(wip ? '/entries/wip' : '/entries')
   }
 
   getStyles() {
@@ -43,7 +58,26 @@ class New extends React.Component {
         marginBottom: '8px'
       },
       button: {
-        margin: '8px'
+        publish: {
+          position: 'fixed',
+          bottom: '25px',
+          right: '25px'
+        },
+        saveWip: {
+          position: 'fixed',
+          bottom: '95px',
+          right: '32px'
+        },
+        edit: {
+          position: 'fixed',
+          bottom: '150px',
+          right: '32px'
+        },
+        preview: {
+          position: 'fixed',
+          bottom: '205px',
+          right: '32px'
+        }
       }
     }
   }
@@ -53,18 +87,6 @@ class New extends React.Component {
     return (
       <div style={styles.container}>
         <div style={styles.content}>
-          <RaisedButton
-            icon={<Save />}
-            label="save wip (&#8984;S)"
-            primary={true}
-            style={styles.button}
-          />
-          <RaisedButton
-            icon={<Publish />}
-            label="publish (&#8984;P)"
-            primary={true}
-            style={styles.button}
-          />
           <Tabs>
             <Tab label="Write">
               <TextField
@@ -76,6 +98,7 @@ class New extends React.Component {
               />
               <Editor
                 defaultValue={this.state.content}
+                rows={15}
                 onChange={content => this.setState({content: content})}
               />
             </Tab>
@@ -84,6 +107,34 @@ class New extends React.Component {
             </Tab>
           </Tabs>
         </div>
+        <FloatingActionButton
+          style={styles.button.publish}
+          onMouseDown={() => this.handleSave(false)}
+        >
+          <Publish />
+        </FloatingActionButton>
+        <FloatingActionButton
+          mini={true}
+          secondary={true}
+          style={styles.button.saveWip}
+          onMouseDown={() => this.handleSave(true)}
+        >
+          <Save />
+        </FloatingActionButton>
+        <FloatingActionButton
+          mini={true}
+          secondary={true}
+          style={styles.button.edit}
+        >
+          <ModeEdit />
+        </FloatingActionButton>
+        <FloatingActionButton
+          mini={true}
+          secondary={true}
+          style={styles.button.preview}
+        >
+          <Visibility />
+        </FloatingActionButton>
       </div>
     )
   }
