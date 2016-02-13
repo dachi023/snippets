@@ -17,4 +17,4 @@ deploy:
     steps:
         - lukevivier/gh-pages:
             token: $GITHUB_TOKEN
-            basedir: public
+            basedir: dist
