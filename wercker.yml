@@ -1,15 +1,12 @@
-box: simondelacourt/node-ruby-rvm
+box: node
 build:
     steps:
-        - script:
-            name: install global node modules
-            code: sudo npm install -g gulp
         - script:
             name: install local node modules
             code: sudo npm install
         - script:
             name: build sources
-            code: gulp build
+            code: npm run build
         - script:
             name: echo nodejs information
             code: |
