@@ -31,7 +31,7 @@ module.exports = {
   watch: false,
   devtool: '#source-map',
   devServer: {
-    contentBase: './src',
+    contentBase: './dist',
     hot: true
   }
 };
