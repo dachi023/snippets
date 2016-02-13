@@ -7,8 +7,8 @@
 
 - [x] Markdown editor
 - [x] Markdown preview
-- [ ] Snippets list
-- [ ] Post Snippets
+- [x] Snippets list
+- [x] Post Snippets
 - [ ] Edit Snippets
 
 ## Issue
