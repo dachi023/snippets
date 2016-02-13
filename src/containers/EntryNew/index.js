@@ -99,7 +99,7 @@ class EntryNew extends React.Component {
               <Editor
                 defaultValue={this.state.content}
                 rows={15}
-                onChange={content => this.setState({content: content})}
+                onChange={content => this.setState({content})}
               />
             </Tab>
             <Tab label="Preview">
