@@ -21,7 +21,7 @@ class EntriesWip extends React.Component {
 
   componentDidMount() {
     const me = User.me()
-    if (!me.token) {
+    if (!me.isLogged) {
       return this.context.router.push('/signup')
     }
     let ref = new Firebase(me.firebaseUrl)

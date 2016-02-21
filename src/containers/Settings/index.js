@@ -18,7 +18,7 @@ class Settings extends React.Component {
   }
 
   componentDidMount() {
-    if (!User.me().token) {
+    if (!User.me().isLogged) {
       return this.context.router.push('/signup')
     }
   }

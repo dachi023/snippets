@@ -21,7 +21,7 @@ class EntryEdit extends React.Component {
 
   componentDidMount() {
     const me = User.me()
-    if (!me.token) {
+    if (!me.isLogged) {
       return this.context.router.push('/signup')
     }
     const path = `snippets/entries/${this.props.params.id}`

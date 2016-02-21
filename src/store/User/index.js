@@ -36,6 +36,10 @@ class User {
     }
   }
 
+  isLogged() {
+    return this.token != null
+  }
+
   save() {
     localStorage.setItem('user', JSON.stringify(this.data))
   }
