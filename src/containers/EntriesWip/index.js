@@ -51,7 +51,7 @@ class EntriesWip extends React.Component {
 
   render() {
     const styles = this.getStyles()
-    const entries = this.state.entries.map(entry => {
+    const entries = this.state.entries.reverse().map(entry => {
       return (
         <div key={entry.key()}>
           <ListItem
@@ -66,7 +66,7 @@ class EntriesWip extends React.Component {
     })
     return (
       <div style={styles.container}>
-        <List subheader="WIP Snippets" style={styles.list}>
+        <List subheader="Your WIP Snippets" style={styles.list}>
           {entries}
         </List>
       </div>
