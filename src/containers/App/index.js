@@ -1,10 +1,11 @@
 import React from 'react'
-import {AppBar, LeftNav, MenuItem, Divider} from 'material-ui'
+import {AppBar, FlatButton, LeftNav, MenuItem, Divider} from 'material-ui'
 import {getMuiTheme} from 'material-ui/lib/styles'
 import Add from 'material-ui/lib/svg-icons/content/add'
 import Drafts from 'material-ui/lib/svg-icons/content/drafts'
 import Inbox from 'material-ui/lib/svg-icons/content/inbox'
 import Settings from 'material-ui/lib/svg-icons/action/settings'
+import User from '../../store/User'
 
 class App extends React.Component {
   constructor(props) {
@@ -91,12 +92,16 @@ class App extends React.Component {
   }
 
   render() {
+    const user = User.me()
     const styles = this.getStyles()
     return (
       <div>
         <AppBar
           title="Snippets"
           showMenuIconButton={false}
+          iconElementRight={
+            <FlatButton label={user.username} disabled={true} />
+          }
           style={styles.appBar}
         />
         <LeftNav open={true} style={styles.leftNav}>
