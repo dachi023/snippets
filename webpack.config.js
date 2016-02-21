@@ -7,7 +7,7 @@ module.exports = {
     html: './index.html'
   },
   output: {
-    path: path.join(__dirname, './dist'),
+    path: path.join(__dirname, './public'),
     filename: 'bundle.js'
   },
   resolve: {
@@ -31,7 +31,7 @@ module.exports = {
   watch: false,
   devtool: '#source-map',
   devServer: {
-    contentBase: './dist',
+    contentBase: './public',
     hot: true
   }
 };
