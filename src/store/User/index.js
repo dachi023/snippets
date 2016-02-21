@@ -36,7 +36,7 @@ class User {
     }
   }
 
-  isLogged() {
+  get isLogged() {
     return this.token != null
   }
 
