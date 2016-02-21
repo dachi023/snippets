@@ -14,7 +14,8 @@ class EntryNew extends React.Component {
     super(props)
     this.state = {
       title: '',
-      content: ''
+      content: '',
+      showPreview: false
     }
   }
 
@@ -41,6 +42,10 @@ class EntryNew extends React.Component {
       comments: []
     })
     this.context.router.push(wip ? '/entries/wip' : '/entries')
+  }
+
+  hendleToggleMode(showPreview) {
+    this.setState({showPreview: showPreview})
   }
 
   getStyles() {
@@ -87,25 +92,25 @@ class EntryNew extends React.Component {
     return (
       <div style={styles.container}>
         <div style={styles.content}>
-          <Tabs>
-            <Tab label="Write">
-              <TextField
-                floatingLabelText="Title"
-                fullWidth={true}
-                hintText="Week 1-7 Jun 2016"
-                onChange={e => this.setState({title: e.target.value})}
-                required={true}
-              />
-              <MarkdownEditor
-                rows={15}
-                onChange={content => this.setState({content})}
-              />
-            </Tab>
-            <Tab label="Preview">
-              <Previewer title={this.state.title} content={this.state.content} />
-            </Tab>
-          </Tabs>
+          {
+            this.state.showPreview
+              ? <Previewer title={this.state.title} content={this.state.content} />
+              : <div>
+                  <TextField
+                    floatingLabelText="Title"
+                    fullWidth={true}
+                    hintText="Week 1-7 Jun 2016"
+                    onChange={e => this.setState({title: e.target.value})}
+                    required={true}
+                  />
+                  <MarkdownEditor
+                    rows={15}
+                    onChange={content => this.setState({content})}
+                  />
+                </div>
+          }
         </div>
+
         <FloatingActionButton
           style={styles.button.publish}
           onMouseDown={() => this.handleSave(false)}
@@ -124,6 +129,7 @@ class EntryNew extends React.Component {
           mini={true}
           secondary={true}
           style={styles.button.edit}
+          onMouseDown={() => this.hendleToggleMode(false)}
         >
           <ModeEdit />
         </FloatingActionButton>
@@ -131,6 +137,7 @@ class EntryNew extends React.Component {
           mini={true}
           secondary={true}
           style={styles.button.preview}
+          onMouseDown={() => this.hendleToggleMode(true)}
         >
           <Visibility />
         </FloatingActionButton>
