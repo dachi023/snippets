@@ -20,7 +20,7 @@ class EntryNew extends React.Component {
   }
 
   componentDidMount() {
-    if (!User.me()) {
+    if (!User.me().token) {
       return this.context.router.push('/signup')
     }
   }

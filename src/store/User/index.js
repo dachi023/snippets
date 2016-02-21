@@ -1,13 +1,17 @@
 class User {
   constructor(user = {}) {
-    this.username = user.username
-    this.email = user.email
-    this.firebaseUrl = user.firebaseUrl
-    this.token = user.token
+    if (!user) {
+      user = {}
+    }
+    this.data = user
   }
 
   static me() {
     return new User(JSON.parse(localStorage.getItem('user')))
+  }
+
+  get keys() {
+    return ['username', 'email', 'firebaseUrl', 'token']
   }
 
   get data() {
@@ -16,6 +20,19 @@ class User {
       email: this.email,
       firebaseUrl: this.firebaseUrl,
       token: this.token
+    }
+  }
+
+  set data(user) {
+    for (let i = 0, len = this.keys.length; i < len; i++) {
+      const key = this.keys[i]
+      if (user[key]) {
+        this[key] = user[key]
+        continue
+      }
+      if (!this[key]) {
+        this[key] = null
+      }
     }
   }
 

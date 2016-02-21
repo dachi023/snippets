@@ -3,6 +3,7 @@ import {Route, IndexRoute} from 'react-router'
 
 import App from './containers/App'
 import Signup from './containers/Signup'
+import Settings from './containers/Settings'
 import Entries from './containers/Entries'
 import EntriesWip from './containers/EntriesWip'
 import EntryNew from './containers/EntryNew'
@@ -13,7 +14,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={Signup} />
     <Route path="signup" component={Signup} />
-    <Route path="settings" component="" />
+    <Route path="settings" component={Settings} />
     <Route path="entries" component={Entries} />
     <Route path="entries/wip" component={EntriesWip} />
     <Route path="entry/new" component={EntryNew} />

@@ -8,10 +8,9 @@ class Configure extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: '',
-      email: '',
-      firebaseUrl: '',
-      token: null
+      username: null,
+      email: null,
+      firebaseUrl: null
     }
   }
 
@@ -33,18 +32,35 @@ class Configure extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    let ref = new Firebase(this.state.firebaseUrl)
-    ref.child('snippets/passPhrase').once('value', res => {
-      const token = Crypto.AES.encrypt(this.state.email, res.val()).toString()
-      this.setState({token})
-      new User(this.state).save()
-      if (typeof this.props.handleSubmit == 'function') {
-        this.props.handleSubmit(e, this.state)
+    const callback = (e, state) => {
+      if (typeof this.props.handleSubmit === 'function') {
+        this.props.handleSubmit(e, state)
       }
+    }
+
+    let user = User.me()
+    if (user.token) {
+      user.data = this.state
+      user.save()
+      callback(e, this.state)
+      return
+    }
+
+    const ref = new Firebase(this.state.firebaseUrl)
+    ref.child('snippets/passPhrase').once('value', res => {
+      user.data = {
+        username: this.state.username,
+        email: this.state.email,
+        firebaseUrl: this.state.firebaseUrl,
+        token: Crypto.AES.encrypt(this.state.email, res.val()).toString()
+      }
+      user.save()
+      callback(e, this.state)
     })
   }
 
   render() {
+    const user = User.me()
     const styles = this.getStyles()
     return (
       <div style={styles.container}>
@@ -52,6 +68,7 @@ class Configure extends React.Component {
           <CardText>
             <form onSubmit={e => this.handleSubmit(e)}>
               <TextField
+                defaultValue={user.username}
                 floatingLabelText="Username"
                 fullWidth={true}
                 hintText="John Doe"
@@ -59,6 +76,7 @@ class Configure extends React.Component {
                 required={true}
               /><br />
               <TextField
+                defaultValue={user.email}
                 floatingLabelText="Email"
                 fullWidth={true}
                 hintText="john.doe@example.com"
@@ -67,6 +85,7 @@ class Configure extends React.Component {
                 type="email"
               /><br />
               <TextField
+                defaultValue={user.firebaseUrl}
                 floatingLabelText="Firebase Url"
                 fullWidth={true}
                 hintText="https://xxx.firebaseio.com"

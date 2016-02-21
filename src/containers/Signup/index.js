@@ -1,10 +1,17 @@
 import React from 'react'
 import Configure from '../../components/Configure'
+import User from '../../store/User'
 
 class Signup extends React.Component {
   static get contextTypes() {
     return {
       router: React.PropTypes.object.isRequired
+    }
+  }
+
+  componentDidMount() {
+    if (User.me().token) {
+      return this.context.router.push('/entries')
     }
   }
 

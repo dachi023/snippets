@@ -20,8 +20,8 @@ class Entries extends React.Component {
   }
 
   componentDidMount() {
-    let me = User.me()
-    if (!me) {
+    const me = User.me()
+    if (!me.token) {
       return this.context.router.push('/signup')
     }
     let ref = new Firebase(me.firebaseUrl)

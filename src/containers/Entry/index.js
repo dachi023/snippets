@@ -13,7 +13,7 @@ class Entry extends React.Component {
 
   componentDidMount() {
     const me = User.me()
-    if (!me) {
+    if (!me.token) {
       return this.context.router.push('/signup')
     }
     const path = `snippets/entries/${this.props.params.id}`

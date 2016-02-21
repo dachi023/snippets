@@ -20,16 +20,15 @@ class EntriesWip extends React.Component {
   }
 
   componentDidMount() {
-    let me = User.me()
-    if (!me) {
+    const me = User.me()
+    if (!me.token) {
       return this.context.router.push('/signup')
     }
     let ref = new Firebase(me.firebaseUrl)
     ref.child('snippets/entries').once('value', res => {
       let entries = []
-      const token = me.token
       res.forEach(entry => {
-        if (entry.val().wip && token === entry.val().token) {
+        if (entry.val().wip && me.token === entry.val().token) {
           entries.push(entry)
         }
       })
