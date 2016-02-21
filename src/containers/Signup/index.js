@@ -1,4 +1,5 @@
 import React from 'react'
+import Snackbar from 'material-ui/lib/snackbar'
 import Configure from '../../components/Configure'
 import User from '../../store/User'
 

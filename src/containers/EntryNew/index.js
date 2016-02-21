@@ -1,5 +1,5 @@
 import React from 'react'
-import {FloatingActionButton, Tabs, Tab, TextField} from 'material-ui'
+import {FloatingActionButton, TextField} from 'material-ui'
 import Visibility from 'material-ui/lib/svg-icons/action/visibility'
 import Save from 'material-ui/lib/svg-icons/content/save'
 import ModeEdit from 'material-ui/lib/svg-icons/editor/mode-edit'

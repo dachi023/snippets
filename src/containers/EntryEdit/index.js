@@ -1,5 +1,5 @@
 import React from 'react'
-import {FloatingActionButton, Tabs, Tab, TextField} from 'material-ui'
+import {FloatingActionButton, TextField} from 'material-ui'
 import Visibility from 'material-ui/lib/svg-icons/action/visibility'
 import Save from 'material-ui/lib/svg-icons/content/save'
 import ModeEdit from 'material-ui/lib/svg-icons/editor/mode-edit'
@@ -51,6 +51,10 @@ class EntryEdit extends React.Component {
     this.context.router.push(wip ? '/entries/wip' : '/entries')
   }
 
+  hendleToggleMode(showPreview) {
+    this.setState({showPreview: showPreview})
+  }
+
   getStyles() {
     return {
       container: {
@@ -95,27 +99,27 @@ class EntryEdit extends React.Component {
     return (
       <div style={styles.container}>
         <div style={styles.content}>
-          <Tabs>
-            <Tab label="Write">
-              <TextField
-                value={this.state.title}
-                floatingLabelText="Title"
-                fullWidth={true}
-                hintText="Week 1-7 Jun 2016"
-                onChange={e => this.setState({title: e.target.value})}
-                required={true}
-              />
-              <MarkdownEditor
-                value={this.state.content}
-                rows={15}
-                onChange={content => this.setState({content})}
-              />
-            </Tab>
-            <Tab label="Preview">
-              <Previewer title={this.state.title} content={this.state.content} />
-            </Tab>
-          </Tabs>
+          {
+            this.state.showPreview
+              ? <Previewer title={this.state.title} content={this.state.content} />
+              : <div>
+                  <TextField
+                    value={this.state.title}
+                    floatingLabelText="Title"
+                    fullWidth={true}
+                    hintText="Week 1-7 Jun 2016"
+                    onChange={e => this.setState({title: e.target.value})}
+                    required={true}
+                  />
+                  <MarkdownEditor
+                    value={this.state.content}
+                    rows={15}
+                    onChange={content => this.setState({content})}
+                  />
+                </div>
+          }
         </div>
+
         <FloatingActionButton
           style={styles.button.publish}
           onMouseDown={() => this.handleSave(false)}
@@ -134,6 +138,7 @@ class EntryEdit extends React.Component {
           mini={true}
           secondary={true}
           style={styles.button.edit}
+          onMouseDown={() => this.hendleToggleMode(false)}
         >
           <ModeEdit />
         </FloatingActionButton>
@@ -141,6 +146,7 @@ class EntryEdit extends React.Component {
           mini={true}
           secondary={true}
           style={styles.button.preview}
+          onMouseDown={() => this.hendleToggleMode(true)}
         >
           <Visibility />
         </FloatingActionButton>
