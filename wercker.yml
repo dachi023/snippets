@@ -12,9 +12,9 @@ build:
             code: |
                 echo "node version $(node -v) running"
                 echo "npm version $(npm -v) running"
-deploy:
-    deploy:
-    steps:
-        - lukevivier/gh-pages:
-            token: $GITHUB_TOKEN
-            basedir: dist
+# deploy:
+#     deploy:
+#     steps:
+#         - lukevivier/gh-pages:
+#             token: $GITHUB_TOKEN
+#             basedir: dist
