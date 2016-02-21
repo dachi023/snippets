@@ -3,7 +3,7 @@ import {FloatingActionButton, TextField} from 'material-ui'
 import Visibility from 'material-ui/lib/svg-icons/action/visibility'
 import Save from 'material-ui/lib/svg-icons/content/save'
 import ModeEdit from 'material-ui/lib/svg-icons/editor/mode-edit'
-import Publish from 'material-ui/lib/svg-icons/editor/publish'
+import CloudUpload from 'material-ui/lib/svg-icons/file/cloud-upload'
 import Firebase from 'firebase'
 import MarkdownEditor from '../../components/MarkdownEditor'
 import Previewer from '../../components/Previewer'
@@ -63,7 +63,7 @@ class EntryNew extends React.Component {
         marginBottom: '8px'
       },
       button: {
-        publish: {
+        upload: {
           position: 'fixed',
           bottom: '25px',
           right: '25px'
@@ -112,10 +112,10 @@ class EntryNew extends React.Component {
         </div>
 
         <FloatingActionButton
-          style={styles.button.publish}
+          style={styles.button.upload}
           onMouseDown={() => this.handleSave(false)}
         >
-          <Publish />
+          <CloudUpload />
         </FloatingActionButton>
         <FloatingActionButton
           mini={true}
