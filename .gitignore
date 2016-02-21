@@ -1,0 +1,8 @@
+node_modules/
+public/
+
+*.debug
+*.log
+*.tmp
+
+.DS_Store

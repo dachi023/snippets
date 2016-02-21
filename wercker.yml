@@ -1,0 +1,20 @@
+box: node
+build:
+    steps:
+        - script:
+            name: install local node modules
+            code: sudo npm install
+        - script:
+            name: build sources
+            code: npm run build
+        - script:
+            name: echo nodejs information
+            code: |
+                echo "node version $(node -v) running"
+                echo "npm version $(npm -v) running"
+deploy:
+    deploy:
+    steps:
+        - lukevivier/gh-pages:
+            token: $GITHUB_TOKEN
+            basedir: dist
